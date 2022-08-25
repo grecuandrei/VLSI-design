@@ -1,0 +1,46 @@
+USER SYMBOL by DSCH 3.5
+DATE 5/1/2022 11:53:46 AM
+SYM  #VsmAccumulatorB
+BB(0,0,40,80)
+TITLE 10 -7  #VsmAccumulatorB
+MODEL 6000
+REC(5,5,30,70)
+PIN(0,60,0.00,0.00)kbd1[1]
+PIN(0,50,0.00,0.00)kbd1[2]
+PIN(0,40,0.00,0.00)kbd1[3]
+PIN(0,30,0.00,0.00)kbd1[4]
+PIN(0,70,0.00,0.00)ClearB
+PIN(0,20,0.00,0.00)LatchB
+PIN(0,10,0.00,0.00)MainClk
+PIN(40,10,2.00,1.00)AluB3
+PIN(40,40,2.00,1.00)AluB0
+PIN(40,20,2.00,1.00)AluB2
+PIN(40,30,2.00,1.00)AluB1
+LIG(0,60,5,60)
+LIG(0,50,5,50)
+LIG(0,40,5,40)
+LIG(0,30,5,30)
+LIG(0,70,5,70)
+LIG(0,20,5,20)
+LIG(0,10,5,10)
+LIG(35,10,40,10)
+LIG(35,40,40,40)
+LIG(35,20,40,20)
+LIG(35,30,40,30)
+LIG(5,5,5,75)
+LIG(5,5,35,5)
+LIG(35,5,35,75)
+LIG(35,75,5,75)
+VLG module VsmAccumulatorB( kbd1[1],kbd1[2],kbd1[3],kbd1[4],ClearB,LatchB,MainClk,AluB3,
+VLG  AluB0,AluB2,AluB1);
+VLG  input kbd1[1],kbd1[2],kbd1[3],kbd1[4],ClearB,LatchB,MainClk;
+VLG  output AluB3,AluB0,AluB2,AluB1;
+VLG  wire w7,w10,w12,w14,w16,w18;
+VLG  not #(3) inv_1(w7,ClearB);
+VLG  and #(5) and2_2(w10,MainClk,LatchB);
+VLG  dreg #(4) dreg_3(AluB0,w12,kbd1[1],w7,w10);
+VLG  dreg #(4) dreg_4(AluB1,w14,kbd1[2],w7,w10);
+VLG  dreg #(4) dreg_5(AluB2,w16,kbd1[3],w7,w10);
+VLG  dreg #(4) dreg_6(AluB3,w18,kbd1[4],w7,w10);
+VLG endmodule
+FSYM

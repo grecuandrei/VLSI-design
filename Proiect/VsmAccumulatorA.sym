@@ -1,0 +1,60 @@
+USER SYMBOL by DSCH 3.5
+DATE 5/7/2022 1:33:13 PM
+SYM  #VsmAccumulatorA
+BB(0,0,40,90)
+TITLE 10 -7  #VsmAccumulatorA
+MODEL 6000
+REC(5,5,30,80)
+PIN(0,80,0.00,0.00)A[0]
+PIN(0,70,0.00,0.00)A[1]
+PIN(0,60,0.00,0.00)A[2]
+PIN(0,50,0.00,0.00)A[3]
+PIN(0,40,0.00,0.00)ClearA
+PIN(0,30,0.00,0.00)EnableA
+PIN(0,20,0.00,0.00)LatchA
+PIN(0,10,0.00,0.00)MainClock
+PIN(40,50,2.00,1.00)AluA3
+PIN(40,10,2.00,1.00)IB3
+PIN(40,20,2.00,1.00)IB2
+PIN(40,30,2.00,1.00)IB1
+PIN(40,40,2.00,1.00)IB0
+PIN(40,80,2.00,1.00)AluA0
+PIN(40,70,2.00,1.00)AluA1
+PIN(40,60,2.00,1.00)AluA2
+LIG(0,80,5,80)
+LIG(0,70,5,70)
+LIG(0,60,5,60)
+LIG(0,50,5,50)
+LIG(0,40,5,40)
+LIG(0,30,5,30)
+LIG(0,20,5,20)
+LIG(0,10,5,10)
+LIG(35,50,40,50)
+LIG(35,10,40,10)
+LIG(35,20,40,20)
+LIG(35,30,40,30)
+LIG(35,40,40,40)
+LIG(35,80,40,80)
+LIG(35,70,40,70)
+LIG(35,60,40,60)
+LIG(5,5,5,85)
+LIG(5,5,35,5)
+LIG(35,5,35,85)
+LIG(35,85,5,85)
+VLG module VsmAccumulatorA( A[0],A[1],A[2],A[3],ClearA,EnableA,LatchA,MainClock,
+VLG  AluA3,IB3,IB2,IB1,IB0,AluA0,AluA1,AluA2);
+VLG  input A[0],A[1],A[2],A[3],ClearA,EnableA,LatchA,MainClock;
+VLG  output AluA3,IB3,IB2,IB1,IB0,AluA0,AluA1,AluA2;
+VLG  wire w6,w7,w9,w11,w13,w15,;
+VLG  dreg #(4) dreg_1(AluA0,w9,A[0],w6,w7);
+VLG  dreg #(4) dreg_2(AluA1,w11,A[1],w6,w7);
+VLG  dreg #(4) dreg_3(AluA2,w13,A[2],w6,w7);
+VLG  dreg #(4) dreg_4(AluA3,w15,A[3],w6,w7);
+VLG  not #(3) inv_5(w6,ClearA);
+VLG  and #(5) and2_6(w7,MainClock,LatchA);
+VLG  notif1 #(1) notif1_7(IB0,w9,EnableA);
+VLG  notif1 #(1) notif1_8(IB1,w11,EnableA);
+VLG  notif1 #(1) notif1_9(IB2,w13,EnableA);
+VLG  notif1 #(1) notif1_10(IB3,w15,EnableA);
+VLG endmodule
+FSYM

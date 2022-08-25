@@ -1,0 +1,89 @@
+USER SYMBOL by DSCH 3.5
+DATE 5/7/2022 4:03:47 PM
+SYM  #arithmeticUnit
+BB(0,0,40,110)
+TITLE 10 -7  #arithmeticUnit
+MODEL 6000
+REC(5,5,30,100)
+PIN(0,90,0.00,0.00)A[0]
+PIN(0,80,0.00,0.00)A[1]
+PIN(0,70,0.00,0.00)A[2]
+PIN(0,60,0.00,0.00)A[3]
+PIN(0,10,0.00,0.00)EnableAlu
+PIN(0,50,0.00,0.00)B[0]
+PIN(0,40,0.00,0.00)B[1]
+PIN(0,30,0.00,0.00)B[2]
+PIN(0,20,0.00,0.00)B[3]
+PIN(0,100,0.00,0.00)AddSub
+PIN(40,10,2.00,1.00)IB_Alu[3]
+PIN(40,20,2.00,1.00)IB_Alu[2]
+PIN(40,30,2.00,1.00)IB_Alu[1]
+PIN(40,40,2.00,1.00)IB_Alu[0]
+PIN(40,50,2.00,1.00)Carry
+LIG(0,90,5,90)
+LIG(0,80,5,80)
+LIG(0,70,5,70)
+LIG(0,60,5,60)
+LIG(0,10,5,10)
+LIG(0,50,5,50)
+LIG(0,40,5,40)
+LIG(0,30,5,30)
+LIG(0,20,5,20)
+LIG(0,100,5,100)
+LIG(35,10,40,10)
+LIG(35,20,40,20)
+LIG(35,30,40,30)
+LIG(35,40,40,40)
+LIG(35,50,40,50)
+LIG(5,5,5,105)
+LIG(5,5,35,5)
+LIG(35,5,35,105)
+LIG(35,105,5,105)
+VLG module arithmeticUnit( A[0],A[1],A[2],A[3],EnableAlu,B[0],B[1],B[2],
+VLG  B[3],AddSub,IB_Alu[3],IB_Alu[2],IB_Alu[1],IB_Alu[0],Carry);
+VLG  input A[0],A[1],A[2],A[3],EnableAlu,B[0],B[1],B[2];
+VLG  input B[3],AddSub;
+VLG  output IB_Alu[3],IB_Alu[2],IB_Alu[1],IB_Alu[0],Carry;
+VLG  wire w3,w5,w7,w8,w16,w17,w21,w22;
+VLG  wire w24,w25,w26,w27,w28,w29,w30,w31;
+VLG  wire w33,w34,w35,w36,w37,w38,w39,w40;
+VLG  wire w41,w42,w43,w44,w45,w46,w47,w48;
+VLG  mux #(2) mux_1(w5,B[2],w3,AddSub);
+VLG  not #(1) inv_2(w7,B[1]);
+VLG  bufif1 #(1) bufif1_3(IB_Alu[0],w8,EnableAlu);
+VLG  mux #(2) mux_4(w17,B[0],w16,AddSub);
+VLG  not #(1) inv_5(w16,B[0]);
+VLG  mux #(2) mux_6(w25,B[3],w24,AddSub);
+VLG  mux #(2) mux_7(w26,B[1],w7,AddSub);
+VLG  bufif1 #(1) bufif1_8(IB_Alu[2],w27,EnableAlu);
+VLG  not #(1) inv_9(w24,B[3]);
+VLG  bufif1 #(1) bufif1_10(IB_Alu[3],w28,EnableAlu);
+VLG  mux #(2) mux_11(w21,vss,vdd,AddSub);
+VLG  bufif1 #(1) bufif1_12(IB_Alu[1],w29,EnableAlu);
+VLG  not #(1) inv_13(w3,B[2]);
+VLG  xor #(9) xor2_1_14(w33,A[0],w17);
+VLG  or #(2) or2_2_15(w34,A[0],w17);
+VLG  or #(2) or2_3_16(w22,w35,w36);
+VLG  xor #(9) xor2_4_17(w8,w33,w21);
+VLG  and #(2) and2_5_18(w35,w17,A[0]);
+VLG  and #(2) and2_6_19(w36,w21,w34);
+VLG  xor #(9) xor2_1_20(w37,A[1],w26);
+VLG  or #(2) or2_2_21(w38,A[1],w26);
+VLG  or #(2) or2_3_22(w30,w39,w40);
+VLG  xor #(9) xor2_4_23(w29,w37,w22);
+VLG  and #(2) and2_5_24(w39,w26,A[1]);
+VLG  and #(2) and2_6_25(w40,w22,w38);
+VLG  xor #(9) xor2_1_26(w41,A[3],w25);
+VLG  or #(2) or2_2_27(w42,A[3],w25);
+VLG  or #(2) or2_3_28(Carry,w43,w44);
+VLG  xor #(9) xor2_4_29(w28,w41,w31);
+VLG  and #(2) and2_5_30(w43,w25,A[3]);
+VLG  and #(2) and2_6_31(w44,w31,w42);
+VLG  xor #(9) xor2_1_32(w45,A[2],w5);
+VLG  or #(2) or2_2_33(w46,A[2],w5);
+VLG  or #(2) or2_3_34(w31,w47,w48);
+VLG  xor #(9) xor2_4_35(w27,w45,w30);
+VLG  and #(2) and2_5_36(w47,w5,A[2]);
+VLG  and #(2) and2_6_37(w48,w30,w46);
+VLG endmodule
+FSYM
